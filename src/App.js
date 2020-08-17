@@ -1,10 +1,13 @@
 import React from 'react';
 import Container from './components/Container'
+import Jumbotron from './components/Jumbotron';
 
 function App() {
   return (
-    //jumbotron here
+    <div>
+    <Jumbotron />
     <Container />
+    </div>
   );
 }
 
