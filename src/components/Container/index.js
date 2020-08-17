@@ -7,6 +7,8 @@ import TableBodyItem from "../TableBodyItem"
 function Container() {
     return (
         <div className="container">
+            {/*Put search bar here*/}
+            {/*Put sorting button here, with instructions*/}
             <Table>
                 <TableHead />
                 <TableBody>
