@@ -1,14 +1,16 @@
 import React from 'react';
 
 //this will need props
-function TableBodyItem() {
+function TableBodyItem(props) {
     return (
         <tr>
-            <td>Image</td>
-            <td>Mark Ottoman</td>
-            <td>545-898-9002</td>
-            <td>mark@mdo.com</td>
-            <td>8-17-1993</td>
+            <td>
+                <img alt={props.name} src={props.picture}></img>
+            </td>
+            <td>{props.name}</td>
+            <td>{props.phone}</td>
+            <td>{props.email}</td>
+            <td>{props.dob}</td>
         </tr>
     );
 };

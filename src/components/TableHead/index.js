@@ -4,7 +4,7 @@ function TableHead() {
     return (
         <thead>
             <tr>
-                <th scope="col">Image</th>
+                <th scope="col">Picture</th>
                 <th scope="col">Name</th>
                 <th scope="col">Phone</th>
                 <th scope="col">Email</th>
@@ -15,3 +15,4 @@ function TableHead() {
 };
 
 export default TableHead;
+
