@@ -17,9 +17,9 @@ function Container() {
     const [searchedUser, setSearchedUser] = useState("");
     const [buttonText, setButtonText] = useState("Alphabetize");
 
-    useEffect(() => {
-        loadUsers();
-    });
+    // useEffect(() => {
+    //     loadUsers();
+    // });
 
     function loadUsers() {
         API.getUsers()
@@ -32,31 +32,49 @@ function Container() {
     //let's do the search function
     //put a onChange in Search index, a property that refers to onChange in Btn in render
     //what i want: as I type a name it renders only those that match the name typed
-    const handleInputChange = e => setSearchedUser(e.target.value);
-    
+
     const debouncedInput = useDebounce(searchedUser, 400);
 
     useEffect(() => {
         if(debouncedInput) {
-            const employee = users.filter(name => {
-                //filter out object that matches the searchedUser
-
-            });
-        } //if need be, add an else here that calls loadUser()
+            const result = searchedUser.split(" ")
+            console.log(result);
+            //filter out object that matches the searchedUser
+            const employee = users.filter(name => result[0] == name.name.last || result[0] == name.name.first);
+            setUsers(employee);
+        } else {
+            loadUsers();
+        }
     }, [debouncedInput]);
 
+
+    const handleInputChange = e => {
+        const value = e.target.value;
+        console.log(value);
+        setSearchedUser(value);
+    };
     //then the button
+    // const changeButtonText = e => {
+    //     e.preventDefault();
+
+    //     // if(buttonText === "Alphabetize") {
+    //     //     setButtonText("Reset");
+    //     //     users.sort((a, b) => {
+    //     //         return a.
+    //     //     })
+    //     // }
+    // }
+
 
 
 
     return (
         <div className="container">
-            <p className="text-center">Lorem ipsum dolor sit amet consectetur, adipisicing elit. A, corrupti! Lorem ipsum dolor
-            sit amet.</p>
+            <p className="text-center">To search by name, enter first, last or full name.</p>
             <Row>
                 <Search 
                     handleInputChange={handleInputChange}
-                    results={searchedUser}
+                    // results={searchedUser}
                 />
                 <Btn />
             </Row>
