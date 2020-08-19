@@ -16,7 +16,7 @@ function Container() {
     const [users, setUsers] = useState([]);
     const [searchedUser, setSearchedUser] = useState("");
     const [buttonText, setButtonText] = useState("Alphabetize");
-    const [isSearching, setisSearching] = useState(false);
+    // const [isSearching, setisSearching] = useState(false);
 
     // useEffect(() => {
     //     loadUsers();
@@ -38,11 +38,20 @@ function Container() {
 
     useEffect(() => {
         if(debouncedInput) {
+            console.log(debouncedInput);
             //filter out object that matches the searchedUser
             const employee = users.filter(name => {
-                if (searchedUser == name.name.last || searchedUser == name.name.first) {
+                const first = name.name.first.toLocaleLowerCase();
+                const last = name.name.last.toLocaleLowerCase();
+                const lowerCaseSearchedUser = searchedUser.toLocaleLowerCase();
+                const full = `${first} ${last}`;
+                const fullOriginal = `${name.name.first} ${name.name.last}`
+
+                if (full.includes(lowerCaseSearchedUser)) { //|| full.localeCompare(lowerCaseSearchedUser) == 1 || full.localeCompare(searchedUser)) {
                     return true;
-                }//how to compare string against the concatenation of first and last name together?
+                } else if (fullOriginal.includes(searchedUser)) {
+                    return true;
+                }
             });
             setUsers(employee);
         } else {
@@ -68,17 +77,20 @@ function Container() {
             setButtonText("Alphabetize");
             loadUsers();
         }
-    }//it sorts but the text doesn't change!
+    }
 
 
+    //////////////////////////////////////////
+    //a function that splits the dob to only get the month day and year and then call it in map
 
 
     return (
         <div className="container">
-            <p className="text-center">To search by name, enter first or last name, capitalize first letter.</p>
+            <p className="text-center">To search by name, enter first or last name.</p>
             <Row>
                 <Search 
                     handleInputChange={handleInputChange}
+                    value={searchedUser}
                 />
                 <Btn 
                     changeButtonText={changeButtonText}
