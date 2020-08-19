@@ -33,14 +33,18 @@ function Container() {
     //put a onChange in Search index, a property that refers to onChange in Btn in render
     //what i want: as I type a name it renders only those that match the name typed
 
-    const debouncedInput = useDebounce(searchedUser, 400);
+    const debouncedInput = useDebounce(searchedUser, 500);
 
     useEffect(() => {
         if(debouncedInput) {
             const result = searchedUser.split(" ")
             console.log(result);
             //filter out object that matches the searchedUser
-            const employee = users.filter(name => result[0] == name.name.last || result[0] == name.name.first);
+            const employee = users.filter(name => {
+                if (searchedUser == name.name.last || searchedUser == name.name.first) {
+                    return true;
+                }
+            });
             setUsers(employee);
         } else {
             loadUsers();
@@ -70,11 +74,10 @@ function Container() {
 
     return (
         <div className="container">
-            <p className="text-center">To search by name, enter first, last or full name.</p>
+            <p className="text-center">To search by name, enter first or last name, capitalize first letter.</p>
             <Row>
                 <Search 
                     handleInputChange={handleInputChange}
-                    // results={searchedUser}
                 />
                 <Btn />
             </Row>
