@@ -1,9 +1,9 @@
 import React from "react";
 
-function Btn() {
+function Btn(props) {
     return (
         <div className="col-3 d-inline">
-            <div className="btn btn-success">Alphabetize!</div>
+            <div className="btn btn-success" onClick={props.changeButtonText}>Alphabetize!</div>
         </div>
     );
 };

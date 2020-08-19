@@ -37,13 +37,11 @@ function Container() {
 
     useEffect(() => {
         if(debouncedInput) {
-            const result = searchedUser.split(" ")
-            console.log(result);
             //filter out object that matches the searchedUser
             const employee = users.filter(name => {
                 if (searchedUser == name.name.last || searchedUser == name.name.first) {
                     return true;
-                }
+                }//how to compare string against the concatenation of first and last name together?
             });
             setUsers(employee);
         } else {
@@ -58,16 +56,18 @@ function Container() {
         setSearchedUser(value);
     };
     //then the button
-    // const changeButtonText = e => {
-    //     e.preventDefault();
+    const changeButtonText = e => {
+        e.preventDefault();
 
-    //     // if(buttonText === "Alphabetize") {
-    //     //     setButtonText("Reset");
-    //     //     users.sort((a, b) => {
-    //     //         return a.
-    //     //     })
-    //     // }
-    // }
+        if(buttonText === "Alphabetize") {
+            setButtonText("Reset");
+            const sortUsers = users.sort((a, b) => a.name.last.localeCompare(b.name.last));
+            setUsers(sortUsers);
+        } else if (buttonText === "Reset") {
+            setButtonText("Alphabetize");
+            loadUsers();
+        }
+    }//it sorts but the text doesn't change!
 
 
 
@@ -79,7 +79,9 @@ function Container() {
                 <Search 
                     handleInputChange={handleInputChange}
                 />
-                <Btn />
+                <Btn 
+                    changeButtonText={changeButtonText}
+                />
             </Row>
             <Table>
                 <TableHead />
