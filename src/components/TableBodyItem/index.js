@@ -1,4 +1,5 @@
 import React from 'react';
+import "./style.css";
 
 //this will need props
 function TableBodyItem(props) {

@@ -1,4 +1,5 @@
 import React from "react";
+import "./style.css";
 
 function Search(props) {
     return (
@@ -8,7 +9,7 @@ function Search(props) {
             onChange={props.handleInputChange}
             className="form-control mb-3" 
             type="text" 
-            placeholder="Default input" 
+            placeholder="Enter Name" 
             />
         </div>
     );

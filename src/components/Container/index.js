@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import "./style.css";
 import Table from "../Table";
 import TableHead from "../TableHead"
 import TableBody from "../TableBody"
@@ -79,8 +80,6 @@ function Container() {
         }
     }
 
-
-    //////////////////////////////////////////
     //a function that splits the dob to only get the month day and year and then call it in map
     function splitDob(str) {
         return str.slice(0, 10);
@@ -88,7 +87,8 @@ function Container() {
 
     return (
         <div className="container">
-            <p className="text-center">To search by name, enter first or last name.</p>
+            <p className="text-center name">To search by name, enter first, last, or full name.</p>
+            <p className="text-center">To alphabetize by last name, click "Alphabetize". Click "Reset" to undo alphabetization.</p>
             <Row>
                 <Search 
                     handleInputChange={handleInputChange}
