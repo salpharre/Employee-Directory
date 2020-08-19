@@ -16,6 +16,7 @@ function Container() {
     const [users, setUsers] = useState([]);
     const [searchedUser, setSearchedUser] = useState("");
     const [buttonText, setButtonText] = useState("Alphabetize");
+    const [isSearching, setisSearching] = useState(false);
 
     // useEffect(() => {
     //     loadUsers();
@@ -81,6 +82,7 @@ function Container() {
                 />
                 <Btn 
                     changeButtonText={changeButtonText}
+                    text={buttonText}
                 />
             </Row>
             <Table>
