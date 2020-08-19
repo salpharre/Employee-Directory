@@ -82,7 +82,9 @@ function Container() {
 
     //////////////////////////////////////////
     //a function that splits the dob to only get the month day and year and then call it in map
-
+    function splitDob(str) {
+        return str.slice(0, 10);
+    }
 
     return (
         <div className="container">
@@ -107,7 +109,7 @@ function Container() {
                             name={`${user.name.first} ${user.name.last}`}
                             phone={user.phone}
                             email={user.email}
-                            dob={user.dob.date}
+                            dob={splitDob(user.dob.date)}
                         />
                     ))}
                 </TableBody>
