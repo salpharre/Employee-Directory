@@ -18,7 +18,7 @@ Built using React, this employee directory allows users to sort employees alphab
 
 For [webpage](https://employee-directory3247.herokuapp.com/)
 
-For [demo](https://youtu.be/T2kithNjAOI)
+For [demo](https://youtu.be/WXVXlCT4oUM)
 
 ### Installation
 
@@ -27,7 +27,15 @@ Enter the following to install:
 
 ### Usage
 
-soon!
+Search by name or click the button to alphabetize by name.
+
+##### Search
+
+Lowercase or capitalized, the search bar will display employees whose name matches what is typed. Will also work if only a part of the name is entered.
+
+##### Button
+
+Click `Alphabetize` and employees will sort by last name. The text will change to `Reset` once clicked. Clicking `Reset` will re-load the employees (un-alphabetizing).
 
 ### Technology
 
@@ -47,4 +55,4 @@ Public and free-to-use
 
 ### Launch
 
-Launch date: `August 19th, 2020`
+Launch date: `August 20th, 2020`
