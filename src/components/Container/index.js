@@ -1,3 +1,4 @@
+//import all components and utils and style needed for container component
 import React, { useState, useEffect } from "react";
 import "./style.css";
 import Table from "../Table";
@@ -17,12 +18,8 @@ function Container() {
     const [users, setUsers] = useState([]);
     const [searchedUser, setSearchedUser] = useState("");
     const [buttonText, setButtonText] = useState("Alphabetize");
-    // const [isSearching, setisSearching] = useState(false);
 
-    // useEffect(() => {
-    //     loadUsers();
-    // });
-
+    //seperate function that loads users from api and saves it to state as an array
     function loadUsers() {
         API.getUsers()
             .then(res => {
@@ -31,46 +28,53 @@ function Container() {
                 setUsers(res.data.results);
             }).catch(err => console.log(err));
     };
-    //let's do the search function
-    //put a onChange in Search index, a property that refers to onChange in Btn in render
-    //what i want: as I type a name it renders only those that match the name typed
+    //holds the custom hook that uses the typed input and set delay amount that filters through current state array
+    const debouncedInput = useDebounce(searchedUser, 300);
 
-    const debouncedInput = useDebounce(searchedUser, 500);
-
+    //The if conditional only occurs when the there is a debouncedInput, the else conditional still happens, loading the users from the api
     useEffect(() => {
-        if(debouncedInput) {
+        if (debouncedInput) {
             console.log(debouncedInput);
-            //filter out object that matches the searchedUser
-            const employee = users.filter(name => {
+            filterAPI();
+        } else {
+            loadUsers();
+        }
+    }, [debouncedInput]);
+
+    //filter out object from api array that matches the searchedUser(typed input in search)
+    //filter from api so the user doesn't need to backspace all the way (and let state reload with all users) before changing input
+    function filterAPI() {
+        API.getUsers().then(res => {
+            const response = res.data.results;
+            const employee = response.filter(name => {
                 const first = name.name.first.toLocaleLowerCase();
                 const last = name.name.last.toLocaleLowerCase();
                 const lowerCaseSearchedUser = searchedUser.toLocaleLowerCase();
                 const full = `${first} ${last}`;
                 const fullOriginal = `${name.name.first} ${name.name.last}`
-
-                if (full.includes(lowerCaseSearchedUser)) { //|| full.localeCompare(lowerCaseSearchedUser) == 1 || full.localeCompare(searchedUser)) {
+                //'includes' method compares any piece of name to string (from object) so that if user only knows a part of the employee's name the api will still be called
+                //compares input to object whether the user types in all lower case or capitalizes the first letter
+                if (full.includes(lowerCaseSearchedUser)) {
                     return true;
                 } else if (fullOriginal.includes(searchedUser)) {
                     return true;
                 }
             });
             setUsers(employee);
-        } else {
-            loadUsers();
-        }
-    }, [debouncedInput]);
-
-
+        });
+    }
+    //grabs value in input and saves it to state
     const handleInputChange = e => {
         const value = e.target.value;
         console.log(value);
         setSearchedUser(value);
     };
-    //then the button
+    //when button is clicked, sort state array alphabetically and text of button changes
+    //to unalphabetize state array, click "reset" and it sets button text back to alphabetize
     const changeButtonText = e => {
         e.preventDefault();
 
-        if(buttonText === "Alphabetize") {
+        if (buttonText === "Alphabetize") {
             setButtonText("Reset");
             const sortUsers = users.sort((a, b) => a.name.last.localeCompare(b.name.last));
             setUsers(sortUsers);
@@ -84,17 +88,17 @@ function Container() {
     function splitDob(str) {
         return str.slice(0, 10);
     }
-
+    //returns components
     return (
         <div className="container">
             <p className="text-center name">To search by name, enter first, last, or full name.</p>
             <p className="text-center">To alphabetize by last name, click "Alphabetize". Click "Reset" to undo alphabetization.</p>
             <Row>
-                <Search 
+                <Search
                     handleInputChange={handleInputChange}
                     value={searchedUser}
                 />
-                <Btn 
+                <Btn
                     changeButtonText={changeButtonText}
                     text={buttonText}
                 />

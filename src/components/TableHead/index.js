@@ -1,6 +1,6 @@
 import React from 'react';
 import "./style.css";
-
+//Table head, labels for each column
 function TableHead() {
     return (
         <thead>

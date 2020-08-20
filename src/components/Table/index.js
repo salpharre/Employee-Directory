@@ -1,5 +1,5 @@
 import React from 'react';
-
+//Bootstrap table
 function Table(props) {
     return (
         <div className="table-responsive">

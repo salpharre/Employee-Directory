@@ -1,7 +1,7 @@
-.text-center {
+.text-center {/*changes font to use serif*/
     font-family: 'Times New Roman', Times, serif;
 }
 
-.name {
+.name {/*removes margin of top p tag so instructions sit closer together*/
     margin-bottom: 0;
 }

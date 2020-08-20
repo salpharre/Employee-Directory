@@ -1,7 +1,6 @@
 import React from 'react';
 import "./style.css";
-
-//this will need props
+//Items for table body, picture, name, phone, email, dob of each user
 function TableBodyItem(props) {
     return (
         <tr>
