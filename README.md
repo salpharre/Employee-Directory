@@ -16,8 +16,6 @@ Built using React, this employee directory allows users to sort employees alphab
 
 ### Demo
 
-For [webpage](https://employee-directory3247.herokuapp.com/)
-
 For [demo](https://youtu.be/WXVXlCT4oUM)
 
 ### Installation
